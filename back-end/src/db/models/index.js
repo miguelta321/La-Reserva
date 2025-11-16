@@ -12,12 +12,14 @@ const db = {};
 const createDBConnection = () => {
   return new Sequelize(config.database, config.username, config.password, {
     host: config.host,
+    port: config.port,
     dialect: config.dialect,
     logging: (message) => {
       logger.info(message);
     },
     timezone: "Europe/Sofia",
     dialectOptions: {
+      ...(config.dialectOptions || {}),
       timezone: "local",
     },
   });
